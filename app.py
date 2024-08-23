@@ -28,43 +28,6 @@ model = genai.GenerativeModel(model_name="gemini-1.5-flash", generation_config=M
 def home():
     return "What do you wanna do with this empty link?"
 
-# @app.post("/api/process")
-# def process_image():
-#     if 'file' not in request.files:
-#         return jsonify({"error": "No file part"}), 400
-
-#     file = request.files['file']
-#     if file.filename == '':
-#         return jsonify({"error": "No selected file"}), 400
-
-#     file_path = Path(f"/tmp/{file.filename}")
-#     file.save(file_path)
-#     for key, value in request.form.items():
-#         print(f"{key}: {value}")
-
-#     system_prompt = request.form.get('system_prompt', "You are a specialist in comprehending receipts.")
-#     user_prompt = "Convert Invoice data into json format with appropriate json tags as required for the data in image "
-#     system_prompt = """
-#                You are a specialist in comprehending receipts.
-#                Input images in the form of receipts will be provided to you,
-#                and your task is to respond to questions based on the content of the input image.
-#                """
-#     response = gemini_output(file_path, system_prompt, user_prompt)
-
-#     try:
-#         json_str = response.replace('```json\n', '').replace('\n```', '')
-       
-#         json_data = json.loads(json_str)
-        
-#         return jsonify(json_data)
-#     except json.JSONDecodeError:
-#         return jsonify({"error": "Failed to decode JSON from response"}), 500
-
-#     finally:
-#         # Clean up the uploaded file
-#         if file_path.exists():
-#             file_path.unlink()
-
 
 @app.post("/api/process")
 def process_image():
@@ -133,4 +96,5 @@ def image_format(image_path):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000)
+
