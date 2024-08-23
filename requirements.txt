@@ -1,0 +1,4 @@
+flask
+psycopg2
+google-generativeai
+flask-cors
